@@ -1,4 +1,8 @@
 const express = require("express");
+const bodyParser = require("body-parser"); 
+const cors = require("cors");
+const userRouter = require("./controller/user-controller");
+
 const app = express();
 const port = 4000;
 
@@ -6,7 +10,8 @@ app.set("view engine", "ejs")
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const userRouter = require("./controller/user-controller");
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}))
 
 //jednoduchá definice routy s HTTP metodou GET, která pouze navrací text
 app.get("/", (req, res) => {

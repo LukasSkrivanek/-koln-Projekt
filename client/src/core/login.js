@@ -1,18 +1,22 @@
 import '../App.css';
 
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import Button from '@mui/material/Button';
 import Axios from 'axios';
-import LoginInfo from "../context/loginInfo";
+import Cookies from 'universal-cookie';
 
 const LogIn = () => {
+    const cookies = new Cookies();
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
     const login = () => {
+        
         Axios.post('http://localhost:4000/user/login', {
             username: name,
             password: password,
@@ -20,12 +24,12 @@ const LogIn = () => {
             if (response.data.message) {
                 setErrMsg(response.data.message);
             } else {
-                LoginInfo.login = true;
-                LoginInfo.id = response.data[0].id;
-                LoginInfo.username = response.data[0].username;
-                LoginInfo.role = response.data[0].role;
+                cookies.set('login', 1, { path: '/' });
+                cookies.set('id', response.data[0].id_u, { path: '/' });
+                cookies.set('username', response.data[0].username, { path: '/' });
+                cookies.set('role', response.data[0].role, { path: '/' });
 
-                Navigate("/");
+                navigate("/");
             }
         })
     }

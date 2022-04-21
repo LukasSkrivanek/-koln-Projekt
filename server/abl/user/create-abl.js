@@ -1,5 +1,7 @@
 const path = require("path");
-const UserDao = require("../../dao/users-dao");
+const Ajv = require("ajv").default;
+const UsersDao = require("../../dao/users-dao");
+let dao = new UsersDao();
 
 let schema = {
     "type": "object",

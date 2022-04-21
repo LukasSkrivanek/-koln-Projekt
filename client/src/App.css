@@ -1,5 +1,9 @@
 /* General */
 
+.hidden {
+  display: none;
+}
+
 .fatDiv {
   border: 1px solid black;
   height: 5000px;
@@ -16,6 +20,10 @@
 
 .white {
   color: White;
+}
+
+.green {
+  color: green;
 }
 
 /* Layout */

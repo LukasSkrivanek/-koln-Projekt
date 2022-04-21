@@ -8,8 +8,8 @@ router.post("/create", async (req, res) => {
     await CreateAbl(req, res)
 });
 
-router.post("/login", async (req, res) => {
-    await LoginAbl(req, res)
+router.get("/login", async (req, res) => {
+    await LoginAbl(req, res);
 });
 
-module.exports = router
+module.exports = router;

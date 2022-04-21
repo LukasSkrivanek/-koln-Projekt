@@ -5,17 +5,20 @@ const cors = require("cors");
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+
+let connection;
 
 class UsersDao {
+
     async CreateUser(user) {
-        this._connectDB();
+        await this._connectDB();
 
         let pass = crypto.createHash('md5').update(user.password).digest("hex");
 
-        var sql = `INSERT INTO users VALUES (NULL, ${user.username}, ${user.email}, ${user.firstName}, ${user.lastName}, ${pass}, CURRENT_TIMESTAMP, 3)`;
+        var sql = `INSERT INTO users VALUES (NULL, '${user.username}', '${user.email}', '${user.firstName}', '${user.lastName}', '${pass}', CURRENT_TIMESTAMP, 3)`;
 
-        con.query(sql, function (err, result) {
+        connection.query(sql, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -26,11 +29,11 @@ class UsersDao {
     }
 
     async GetUser(id) {
-        this._connectDB();
+        await this._connectDB();
 
         let sql = `SELECT * FROM users WHERE id_u = ${id}`;
 
-        con.query(sql, function (err, result, fields) {
+        connection.query(sql, function (err, result, fields) {
             if (err) throw err;
 
             return result;
@@ -38,34 +41,45 @@ class UsersDao {
     }
 
     async LoginUser(user) {
-        this._connectDB();
+        await this._connectDB();
 
         //let pass = crypto.createHash('md5').update(user.password).digest("hex");
         let pass = user.password
 
-        var sql = `SELECT * FROM users WHERE username = ${user.username} AND password = ${pass}`;
-
-        con.query(sql, function (err, result) {
+        let sql = `SELECT * FROM users WHERE username = '${user.username}' AND password = '${pass}'`;
+        
+        connection.query(sql, function (err, result) {
+            console.log(result)
             if (err) {
                 throw err;
-            } 
+            }
 
-            if(result.length > 0) {
+            if (result.length > 0) {
+                console.log("Hi")
                 return result;
             } else {
-                return {message: "Špatné uživatelské jméno nebo heslo"}
+                return { message: "Špatné uživatelské jméno nebo heslo" }
             }
         });
     }
 
     async _connectDB() {
-        var connection = mysql.createConnection({
+        connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
             password: '',
-            database: 'cockbook'
+            database: 'cookbook'
         });
 
-        connection.connect();
+        connection.connect(function(err) {
+            if (err) {
+              return console.error('error: ' + err.message);
+            }
+          
+            console.log('Connected to the MySQL server.');
+            return connection;
+          });
     }
 }
+
+module.exports = UsersDao;
