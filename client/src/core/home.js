@@ -94,14 +94,6 @@ const Home = () => {
         navigate(link)
     }
 
-    const Fun = () => {
-        cookies.set('login', 1, { path: '/' });
-        console.log(state)
-
-        state++;
-        console.log(state)
-    }
-
     return (
         <>
             <div> <h1> Home </h1> </div>

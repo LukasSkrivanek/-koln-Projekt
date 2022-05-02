@@ -8,6 +8,7 @@ import Layout from './core/layout';
 import Home from './core/home';
 import Register from './core/register';
 import LogIn from './core/login';
+import Recipe from './core/recipe';
 import CreateRecipe from './core/createRecipe'
 import Missing from './core/missing';
 
@@ -38,7 +39,10 @@ function App() {
             <Route path="register" element={<Register />}></Route>
             <Route path="login" element={<LogIn />}></Route>
 
+            <Route path="recipe" element={<Recipe />}></Route>
+
             <Route path="recipe/">
+              <Route index element={<Recipe />} />
               <Route path="create" element={<CreateRecipe />}></Route>
             </Route>
 

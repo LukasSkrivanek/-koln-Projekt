@@ -19,10 +19,10 @@ const RecipeCard = (props) => {
             alt="Card image cap"
             onError={(e)=>{e.target.onerror = null; e.target.src=Image_not_found}}></img>
             <div className="card-body">
-                <h5 className="card-title"> {props.recipe.title} </h5>
+                <h5 className="card-title"> <a href={"recipe?id=" + props.recipe.id_re} className="card-link"> {props.recipe.title} </a> </h5>
                 <p className="card-text"> {props.recipe.description} </p>
                 <div className='card-block'>
-                    <span> <BiTimeFive /> {props.recipe.estimatedTime} mins </span>
+                    <span> <BiTimeFive /> {props.recipe.estimatedTime} min </span>
                     <span> <FaMoneyBill /> {props.recipe.estimatedPrice} Kč </span>
                 </div>
                 <div className='card-user'>

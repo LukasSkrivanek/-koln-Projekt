@@ -99,6 +99,29 @@
   float: left;
 }
 
+/* Recipe Body */
+.recipe-body-divider {
+  border-top: 1px solid rgb(168, 167, 180);
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+
+.recipe-body-subtitle {
+  color: black;
+}
+
+.recipe-body-img {
+  float: right;
+  max-width: 374px;
+  max-height: 180px;
+  margin-bottom: 15px;
+}
+
+.recipe-body-description {
+  float: left;
+}
+
+
 /* Recipe Lists */
 
 .recipeList h2 {
@@ -131,6 +154,11 @@
 
 .card-img {
   padding: 5px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: black;
 }
 
 /* Home */
