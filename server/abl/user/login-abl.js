@@ -19,8 +19,8 @@ async function LoginAbl(req, res) {
         const valid = ajv.validate(schema, body);
 
         if (valid) {
-            const user = await dao.LoginUser(body);
-            console.log(user);
+            let user = await dao.LoginUser(body);
+
             if (!user) {
                 res.status(400).send({
                     errorMessage: "Ověření údajů se nezdařilo. Chyba sítě",
@@ -28,7 +28,7 @@ async function LoginAbl(req, res) {
                     reason: ajv.errors
                 })
             }
-            
+            console.log(user)
             res.json(user);
         } else {
             res.status(400).send({

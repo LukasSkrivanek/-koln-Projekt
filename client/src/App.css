@@ -4,6 +4,10 @@
   display: none;
 }
 
+.space {
+  width: 15px;
+}
+
 .fatDiv {
   border: 1px solid black;
   height: 5000px;
@@ -12,6 +16,10 @@
 .new-line {
   white-space: pre-line;
   height: 15px;
+}
+
+.no_decoration {
+  text-decoration: none;
 }
 
 .red {
@@ -26,6 +34,17 @@
   color: green;
 }
 
+/* Cards */
+.sucess_card {
+  background-color: rgb(66, 245, 114);
+  border-radius: 5px;
+}
+
+.sucess_card_inside {
+  display: table;
+  margin: 0 auto;
+}
+
 /* Layout */
 
 .layout-ul {
@@ -37,11 +56,81 @@
   border-left: 1px solid grey;
 }
 
+/* Home */
+.recipe-div {
+  padding-bottom: 55px;
+}
+
+.recipe-div button {
+  float: right;
+  margin-right: 15px;
+}
+
+/* createRecipe */
+.icon {
+  margin-left: 5px;
+}
+
+.addRecipe-img {
+  max-width: 374px;
+  max-height: 180px;
+}
+
+.addRecipe-left {
+  float: left;
+}
+
+.addRecipe-btn {
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+.addRecipe-right {
+  float:right;
+  margin-bottom: 10px;
+}
+
+.addRecipe-right img {
+  float: center;
+  aspect-ratio: 16 / 9;
+}
+
+.addRecipe-btn-div {
+  float: left;
+}
+
 /* Recipe Lists */
 
-.recipeList {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+.recipeList h2 {
+  margin-left: 15px;
+}
+
+/* Recipe Card */
+
+.card-block {
+  display: inline-block;
+}
+
+.card-block span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card-user {
+  padding-top: 10px;
+}
+
+.card-user a {
+  color: black;
+  text-decoration: none;
+}
+
+.card-group {
+  margin: 15px;
+}
+
+.card-img {
+  padding: 5px;
 }
 
 /* Home */

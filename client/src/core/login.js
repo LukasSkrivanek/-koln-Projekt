@@ -1,11 +1,12 @@
 import '../App.css';
 
 import { Outlet, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Button from '@mui/material/Button';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
+
 
 const LogIn = () => {
     const cookies = new Cookies();
@@ -16,8 +17,8 @@ const LogIn = () => {
     const [errMsg, setErrMsg] = useState('');
 
     const login = () => {
-        
-        Axios.post('http://localhost:4000/user/login', {
+
+        Axios.get('http://localhost:4000/user/login', {
             username: name,
             password: password,
         }).then((response) => {

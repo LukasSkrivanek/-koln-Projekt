@@ -26,7 +26,7 @@ async function CreateAbl(req, res) { // Dokončit ověření pro existující em
 
             if (user.password == user.confirmPassword) {
 
-                user = await dao.LoginUser(user);
+                user = await dao.CreateUser(user);
                 res.json(user);
             } else {
                 res.status(400).send({
@@ -46,6 +46,7 @@ async function CreateAbl(req, res) { // Dokončit ověření pro existující em
         if (e.message.includes("Uživatel s tímto id ")) {
             res.status(400).send({ errorMessage: e.message, params: req.body })
         }
+        
         res.status(500).send(e)
     }
 }

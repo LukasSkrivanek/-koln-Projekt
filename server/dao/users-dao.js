@@ -14,8 +14,8 @@ class UsersDao {
     async CreateUser(user) {
         await this._connectDB();
 
-        let pass = crypto.createHash('md5').update(user.password).digest("hex");
-
+        const pass = crypto.createHash('md5').update(user.password).digest("hex");
+        
         var sql = `INSERT INTO users VALUES (NULL, '${user.username}', '${user.email}', '${user.firstName}', '${user.lastName}', '${pass}', CURRENT_TIMESTAMP, 3)`;
 
         connection.query(sql, function (err, result) {
@@ -55,7 +55,6 @@ class UsersDao {
             }
 
             if (result.length > 0) {
-                console.log("Hi")
                 return result;
             } else {
                 return { message: "Špatné uživatelské jméno nebo heslo" }

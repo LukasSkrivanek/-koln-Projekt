@@ -2,16 +2,18 @@ import './App.css';
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cookies from 'universal-cookie';
-//import LayoutContext from './context/layoutContext';
+import { LayoutContext } from './context/layoutContext';
 
 import Layout from './core/layout';
 import Home from './core/home';
 import Register from './core/register';
 import LogIn from './core/login';
+import CreateRecipe from './core/createRecipe'
+import Missing from './core/missing';
 
 function App() {
   const cookies = new Cookies();
-  const { location, setLocation } = useState(this);
+  const { state, changeState } = 0;
 
   cookies.set('login', 0, { path: '/' });
   cookies.set('id', '0', { path: '/' });
@@ -26,18 +28,24 @@ function App() {
     .then(data => setRecipeList(data))
   }, [])*/
 
-  //<LayoutContext.Provider value={{ location, setLocation }}></LayoutContext.Provider>
-
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="home" element={<Home />}></Route>
-          <Route path="register" element={<Register />}></Route>
-          <Route path="login" element={<LogIn />}></Route>
-        </Route>
-      </Routes>
+      <LayoutContext.Provider value={{ state, changeState }}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="home" element={<Home />}></Route>
+            <Route path="register" element={<Register />}></Route>
+            <Route path="login" element={<LogIn />}></Route>
+
+            <Route path="recipe/">
+              <Route path="create" element={<CreateRecipe />}></Route>
+            </Route>
+
+            <Route path="*" element={<Missing />}></Route>
+          </Route>
+        </Routes>
+      </LayoutContext.Provider>
     </BrowserRouter>
   );
 }
