@@ -19,8 +19,8 @@ async function DeleteAbl(req, res) {
 
     if (valid) {
         const result = await dao.DeleteRecipe(body.id);
-
-        res.status(200).send(result);
+    
+        res.status(200).send(JSON.stringify(body.id));
     }
     else {
         res.status(400).send({

@@ -32,26 +32,50 @@ class RecipesDao {
 
     async GetRecipe(id) {
         const connectionSync = this._connectDBSync();
-        
+
         let sql = `SELECT * FROM recipes WHERE id_re = ${id}`;
-        
+
         return JSON.stringify(connectionSync.query(sql));
     }
 
     async ListRecipes() {
         const connectionSync = this._connectDBSync();
-        
+
         let sql = `SELECT * FROM recipes`;
-        
+
         return JSON.stringify(connectionSync.query(sql));
     }
 
     async DeleteRecipe(id) {
         const connectionSync = this._connectDBSync();
-        
+
         const syncResult = connectionSync.query(`DELETE FROM recipes WHERE id_re=${id}`);
 
         return id;
+    }
+
+    async UpdateUser(recipe) {
+        try {
+            const connectionSync = this._connectDBSync();
+            
+            let sql = `UPDATE recipes SET 
+            title = '${recipe.title}', 
+            description = '${recipe.description}', 
+            process = '${recipe.process}', 
+            image = '${recipe.image}', 
+            portions = ${recipe.portions}, 
+            estimatedTime = ${recipe.estimatedTime},
+            estimatedPrice = ${recipe.estimatedPrice},
+            category = ${recipe.category}
+            WHERE id_re = ${recipe.id_re}`;
+            
+            const syncResult = connectionSync.query(sql);
+            
+            return syncResult;
+        }
+        catch (e) {
+            return { message: "Chyba při odesílání update. \n" + e.message }
+        }
     }
 
     _connectDBSync() {
