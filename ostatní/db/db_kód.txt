@@ -1,0 +1,85 @@
+CREATE TABLE roles (
+ id_ro int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ name varchar(64) NOT NULL
+);
+
+INSERT INTO roles VALUES (NULL, 'admin'), (NULL, 'editor'), (NULL, 'člen'), (NULL, 'majitel');
+
+CREATE TABLE users (
+ id_u int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ username varchar(256) NOT NULL,
+ email varchar(256) NOT NULL,
+ firstName varchar(128) NOT NULL,
+ lastName varchar(128) NOT NULL,
+ password varchar(512) NOT NULL,
+ created datetime DEFAULT CURRENT_TIMESTAMP,
+ role int default(3),
+ FOREIGN KEY(role) REFERENCES roles(id_ro)
+);
+
+CREATE TABLE categories (
+ id_ca int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ name varchar(64) NOT NULL
+);
+
+CREATE TABLE recipes (
+ id_re int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ title varchar(128) NOT NULL,
+ description varchar(2048) NOT NULL,
+ process varchar(4096) NOT NULL,
+ image varchar(512),
+ portions int NOT NULL,
+ estimatedTime int NOT NULL,
+ estimatedPrice int NOT NULL,
+ createdAt datetime DEFAULT CURRENT_TIMESTAMP,
+ category int,
+ author int,
+ FOREIGN KEY(category) REFERENCES categories(id_ca),
+ FOREIGN KEY(author) REFERENCES users(id_u)
+);
+
+CREATE TABLE ratings (
+ id_ra int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ createdAt datetime DEFAULT CURRENT_TIMESTAMP,
+ isLike boolean NOT NULL,
+ recipe int,
+ author int,
+ FOREIGN KEY(recipe) REFERENCES recipes(id_re),
+ FOREIGN KEY(author) REFERENCES users(id_u)
+);
+
+CREATE TABLE comments (
+ id_co int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ author int,
+ recipe int,
+ content varchar(256) NOT NULL,
+ FOREIGN KEY(recipe) REFERENCES recipes(id_re),
+ FOREIGN KEY(author) REFERENCES users(id_u)
+);
+
+CREATE TABLE measure_units (
+ id_mu int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ name varchar(64) NOT NULL
+);
+
+CREATE TABLE ingredients (
+ id_in int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+ name varchar(64) NOT NULL
+);
+
+CREATE TABLE ing_uni (
+ id_in INT,
+ id_mu INT,
+ FOREIGN KEY(id_in) REFERENCES ingredients(id_in),
+ FOREIGN KEY(id_mu) REFERENCES measure_units(id_mu)
+);
+
+CREATE TABLE rec_ing (
+ id_re int,
+ id_in int,
+ name varchar(64) NOT NULL,
+ measure_unit int,
+ FOREIGN KEY(id_re) REFERENCES recipes(id_re),
+ FOREIGN KEY(id_in) REFERENCES ingredients(id_in),
+ FOREIGN KEY(measure_unit) REFERENCES measure_units(id_mu)
+);

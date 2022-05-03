@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRouter = require("./controller/user-controller");
 const recipeRouter = require("./controller/recipe-controller");
+const ingredientRouter = require("./controller/ingredient-controller");
 
 const app = express();
 const port = 4000;
@@ -27,4 +28,5 @@ app.listen(port, () => {
 // Routery
 app.use("/user", userRouter);
 app.use("/recipes", recipeRouter);
+app.use("/ingredients", ingredientRouter);
 
