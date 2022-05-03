@@ -26,7 +26,7 @@ const RecipeCard = (props) => {
                     <span> <FaMoneyBill /> {props.recipe.estimatedPrice} Kč </span>
                 </div>
                 <div className='card-user'>
-                    <a href={"#"}> <FaUserAlt /> {props.user.firstName} "{props.user.username}" {props.user.lastName} </a>
+                    <a href={"profile?id=" + props.user.id_u}> <FaUserAlt /> {props.user.firstName} "{props.user.username}" {props.user.lastName} </a>
                 </div>
             </div>
             <div className="card-footer">

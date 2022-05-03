@@ -52,7 +52,7 @@ const RecipesBody = (props) => {
                                     <h3 className='recipe-body-subtitle'> Důležité informace </h3>
                                     <ul className="list-group">
                                         <li className="list-group-item">
-                                            <FaUserAlt /> Vytvořeno: <a className='card-link' href='#'> {props.user.firstName} "{props.user.username}" {props.user.lastName} </a>
+                                            <FaUserAlt /> Vytvořeno: <a className='card-link' href={"profile?id=" + props.user.id_u}> {props.user.firstName} "{props.user.username}" {props.user.lastName} </a>
                                         </li>
                                         <li className="list-group-item"> 
                                         <BiCookie /> Porce: 

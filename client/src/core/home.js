@@ -96,8 +96,6 @@ const Home = () => {
 
     return (
         <>
-            <div> <h1> Home </h1> </div>
-
             <div className='recipe-div'>
                 {<RecipesList type={0} recipe={recipes} user={users} category={categories} />}
                 <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("#")}> Více nejnovějších receptů </button>

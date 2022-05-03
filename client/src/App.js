@@ -8,7 +8,9 @@ import Layout from './core/layout';
 import Home from './core/home';
 import Register from './core/register';
 import LogIn from './core/login';
+import Profile from './core/profile';
 import Recipe from './core/recipe';
+
 import CreateRecipe from './core/createRecipe'
 import Missing from './core/missing';
 
@@ -38,7 +40,7 @@ function App() {
             <Route path="home" element={<Home />}></Route>
             <Route path="register" element={<Register />}></Route>
             <Route path="login" element={<LogIn />}></Route>
-
+            <Route path="profile" element={<Profile />}></Route>
             <Route path="recipe" element={<Recipe />}></Route>
 
             <Route path="recipe/">

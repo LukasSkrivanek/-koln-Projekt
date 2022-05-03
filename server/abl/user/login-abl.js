@@ -20,7 +20,7 @@ async function LoginAbl(req, res) {
 
         if (valid) {
             let user = await dao.LoginUser(body);
-
+            console.log(user)
             if (!user) {
                 res.status(400).send({
                     errorMessage: "Ověření údajů se nezdařilo. Chyba sítě",

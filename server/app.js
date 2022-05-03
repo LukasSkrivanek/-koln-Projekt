@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser"); 
 const cors = require("cors");
 const userRouter = require("./controller/user-controller");
+const recipeRouter = require("./controller/recipe-controller");
 
 const app = express();
 const port = 4000;
@@ -23,5 +24,7 @@ app.listen(port, () => {
   console.log(`App starts at http://localhost:${port}`)
 });
 
+// Routery
 app.use("/user", userRouter);
+app.use("/recipes", recipeRouter);
 
