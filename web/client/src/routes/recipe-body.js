@@ -22,7 +22,7 @@ const RecipesBody = (props) => {
     }
 
     const plusPortion = () => {
-        if(portions + 1 < 6) {
+        if(portions + 1 < 11) {
             setPortions(portions + 1)
         } 
     }

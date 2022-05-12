@@ -17,9 +17,9 @@ const RecipesList = (props) => {
             <h2> <b> {name[props.type]} </b> </h2>
 
             <div className="card-group">
-                {<RecipeCard recipe={props.recipe[0]} user={props.user[0]} />}
-                {<RecipeCard recipe={props.recipe[1]} user={props.user[1]} />}
-                {<RecipeCard recipe={props.recipe[0]} user={props.user[2]} />}
+                {<RecipeCard recipe={0} />}
+                {<RecipeCard recipe={1} />}
+                {<RecipeCard recipe={2} />}
             </div>
 
         </div>

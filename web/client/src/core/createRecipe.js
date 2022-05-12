@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { Editor } from '@tinymce/tinymce-react';
 import Button from '@mui/material/Button';
 
+// Routes
+import IngredientsList from '../routes/ingredients-select';
+
 // Obrázky
 import Image_not_found from '../img/image_not_found.jpg'
 import Food_basic from '../img/food_basic.png'
@@ -134,16 +137,24 @@ const CreateRecipe = () => {
                                 </div>
 
                                 <div className='new-line'></div>
+                                <div className="row addRecipe-ing-div">
+                                    <h3> Ingredience: </h3>
+                                    <div className='new-line'></div>
+                                    <IngredientsList />
+                                </div>
+                                <div className='new-line'></div>
+
+                                <div className='new-line'></div>
                                 <div className="row">
                                     <div className="col">
                                         <label> Počet porcí: </label>
-                                        <select className="form-control" onChange={(e) => setPortions(e.target.value)}>
-                                            <option value={1}> 1 </option>
-                                            <option value={2}> 2 </option>
-                                            <option value={3}> 3 </option>
-                                            <option value={4}> 4 </option>
-                                            <option value={5}> 5 </option>
-                                        </select>
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            placeholder="např. 30"
+                                            aria-describedby="basic-addon2"
+                                            value={portions} min="0" max="10" step="1"
+                                            onChange={(e) => setPortions(e.target.value)}></input>
                                     </div>
                                     <div className="col">
                                         <label> Kategorie: </label>
@@ -221,7 +232,7 @@ const CreateRecipe = () => {
                                     <Button
                                         variant="contained"
                                         onClick={sendRecipe}
-                                        >
+                                    >
                                         Přidat recept </Button>
                                     <div className='new-line'></div>
 

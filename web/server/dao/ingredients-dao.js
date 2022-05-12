@@ -35,6 +35,14 @@ class RecipesDao {
         return JSON.stringify(connectionSync.query(sql));
     }
 
+    async ListIngredientsWithUnits() {
+        const connectionSync = this._connectDBSync();
+
+        let sql = `SELECT i.id_in, i.name AS 'ing_name', u.name AS 'unit_name', u.id_mu FROM ingredients i JOIN ing_uni iu ON iu.id_in = i.id_in JOIN measure_units u ON u.id_mu = iu.id_mu;`;
+
+        return JSON.stringify(connectionSync.query(sql));
+    }
+
     async DeleteIngredient(id) {
         const connectionSync = this._connectDBSync();
 

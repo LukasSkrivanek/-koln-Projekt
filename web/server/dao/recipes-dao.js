@@ -46,6 +46,14 @@ class RecipesDao {
         return JSON.stringify(connectionSync.query(sql));
     }
 
+    async ListRecipesWithUsers(limit) {
+        const connectionSync = this._connectDBSync();
+
+        let sql = `SELECT * FROM recipes r JOIN users u WHERE r.author = u.id_u GROUP BY r.id_re DESC`;
+
+        return JSON.stringify(connectionSync.query(sql));
+    }
+
     async DeleteRecipe(id) {
         const connectionSync = this._connectDBSync();
 

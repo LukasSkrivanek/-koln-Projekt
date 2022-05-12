@@ -99,6 +99,17 @@
   float: left;
 }
 
+.addRecipe-ing-div {
+  border-top: 2px solid lightgrey;
+  border-bottom: 2px solid lightgray;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.btn-ing-remove {
+  margin-right: 10px;
+}
+
 /* Recipe Body */
 .recipe-body-divider {
   border-top: 1px solid rgb(168, 167, 180);
