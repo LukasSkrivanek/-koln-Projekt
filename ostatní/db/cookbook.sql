@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2022 at 08:18 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.30
+-- Generation Time: May 19, 2022 at 01:18 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id_ca`, `name`) VALUES
-(1, 'Snídaně');
+(1, 'Anglická snídaně'),
+(2, 'Teplá snídaně'),
+(3, 'Jednoduchá snídaně'),
+(4, 'Kontinentální snídaně');
 
 -- --------------------------------------------------------
 
@@ -68,9 +71,11 @@ CREATE TABLE `ingredients` (
 --
 
 INSERT INTO `ingredients` (`id_in`, `name`) VALUES
-(1, 'Sůl'),
+(1, 'Voda'),
 (2, 'Pepř'),
-(3, 'Paprika');
+(3, 'Paprika'),
+(5, 'Sůl'),
+(6, 'Mléko');
 
 -- --------------------------------------------------------
 
@@ -83,6 +88,22 @@ CREATE TABLE `ing_uni` (
   `id_mu` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `ing_uni`
+--
+
+INSERT INTO `ing_uni` (`id_in`, `id_mu`) VALUES
+(6, 4),
+(6, 1),
+(3, 3),
+(3, 2),
+(2, 3),
+(2, 2),
+(1, 3),
+(1, 2),
+(5, 4),
+(5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +114,16 @@ CREATE TABLE `measure_units` (
   `id_mu` int(11) NOT NULL,
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `measure_units`
+--
+
+INSERT INTO `measure_units` (`id_mu`, `name`) VALUES
+(1, 'ml'),
+(2, 'mg'),
+(3, 'g'),
+(4, 'l');
 
 -- --------------------------------------------------------
 
@@ -133,8 +164,9 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`id_re`, `title`, `description`, `process`, `image`, `portions`, `estimatedTime`, `estimatedPrice`, `createdAt`, `category`, `author`) VALUES
-(4, 'Recept test', 'Jen takový recept', 'Prostě to uvař', '', 4, 30, 300, '2022-05-03 14:21:58', 1, 1),
-(5, 'Recept test', 'Jen', 'Prostě to uvař', '', 4, 30, 300, '2022-05-03 15:35:23', 1, 1);
+(4, 'Recept 1', 'Jen takový recept', 'Prostě to uvař', 'https://ms1.ostium.cz/instance/WrhA7R/h389w574t.jpg', 4, 30, 300, '2022-05-03 14:21:58', 1, 1),
+(5, 'Recept 2', 'Jen', 'Prostě to uvař', '', 4, 30, 300, '2022-05-03 15:35:23', 1, 1),
+(6, 'Recept 3', 'Ideální osvěžení v parných dnech? Samozřejmě zmrzlina a nejlépe ta domácí! Vyzkoušejte oblíbenou pistáciovou. Čistě přírodní, lahodná a s kousky pistácií potěší i náročnější mlsné jazýčky.', 'Prostě to uvař', 'https://ms1.ostium.cz/instance/web-recepty/jLWrhA7R/h389w574t.jpg', 4, 30, 300, '2022-05-03 15:35:23', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -279,7 +311,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_ca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_ca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -291,13 +323,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `measure_units`
 --
 ALTER TABLE `measure_units`
-  MODIFY `id_mu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -309,7 +341,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id_re` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_re` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`

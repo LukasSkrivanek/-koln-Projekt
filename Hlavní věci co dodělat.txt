@@ -1,0 +1,11 @@
+Hlavní věci co dodělat
+-------------------------------------------
+
+Přidání receptu
+ - odeslání správného počtu ingrediencí | HOTOVO
+ - načíst kategorie z DB                | HOTOVO
+ - odeslání receptu do DB               |
+ - nemožnost prázdný recept             |
+
+Recept
+ - načtení ingrediencí z DB             |

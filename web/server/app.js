@@ -5,6 +5,7 @@ const userRouter = require("./controller/user-controller");
 const recipeRouter = require("./controller/recipe-controller");
 const ingredientRouter = require("./controller/ingredient-controller");
 const measureUnitsRouter = require("./controller/measure_units-controller");
+const categoriesRouter = require("./controller/categories-controller");
 
 const app = express();
 const port = 4000;
@@ -31,4 +32,4 @@ app.use("/user", userRouter);
 app.use("/recipes", recipeRouter);
 app.use("/ingredients", ingredientRouter);
 app.use("/measure_units", measureUnitsRouter);
-
+app.use("/categories", categoriesRouter);

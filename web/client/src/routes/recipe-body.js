@@ -11,7 +11,6 @@ import { BiTimeFive, BiCookie } from "react-icons/bi";
 import { FaMoneyBill, FaUserAlt } from "react-icons/fa";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-
 const RecipesBody = (props) => {
     const [portions, setPortions] = useState(props.recipe.portions)
 

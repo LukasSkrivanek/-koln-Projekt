@@ -1,4 +1,5 @@
 import '../App.css';
+import Axios from 'axios'
 
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -16,50 +17,46 @@ import Food_basic from '../img/food_basic.png'
 import { BiTimeFive } from "react-icons/bi";
 import { FaMoneyBill } from "react-icons/fa";
 
-let categories = [
-    {
-        id_ca: 1,
-        name: "Snídaně"
-    },
-    {
-        id_ca: 2,
-        name: "Obědy"
-    },
-    {
-        id_ca: 3,
-        name: "Večeře"
-    }
-]
+let ingredients = [];
+let ingredientsLength = 1;
 
 const CreateRecipe = () => {
+    const [categories, setCategories2] = useState([{ id_ca: 0, name: "LOADING" }]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [process, setProcess] = useState('');
     const [portions, setPortions] = useState(1);
     const [category, setCategory] = useState(categories[0].name);
     const [time, setTime] = useState(0);
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(0);
 
     const [errMsg, setErrMsg] = useState('');
     const [descriptionLength, setDescriptionLength] = useState(0);
     const [link, setLink] = useState('');
-    const [imgLink, setImgLink] = useState('')
-
-    let categoriesOptions = "";
+    const [imgLink, setImgLink] = useState('');
 
     useEffect(() => {
+        getCategories();
         setDescriptionLength(description.length);
     }, [description])
 
-    const catOptions = () => {
-        for (let i = 0; i < categories.length; i++) {
-            categoriesOptions += "<option value='" + categories[i].name + "'>" + categories[i].name + "</option>"
-        }
+    const saveIngredients = (ing) => {
+        ingredients = ing;
+    }
 
-        return categoriesOptions
+    const saveInputLength = (length) => {
+        ingredientsLength = length
+    }
+
+    async function getCategories() {
+        let response = await Axios.get("http://localhost:4000/categories/list", {})
+        
+        setCategories2(response.data)
     }
 
     const sendRecipe = () => {
+        let ing = ingredients.splice(ingredientsLength - 1, ingredients.length - ingredientsLength + 1)
+
         let data = {
             title: title,
             description: description,
@@ -68,7 +65,8 @@ const CreateRecipe = () => {
             category: category,
             estimatedTime: time,
             estimatedPrice: price,
-            image: link
+            image: link,
+            ingredients: ing
         }
 
         console.log(data)
@@ -140,7 +138,7 @@ const CreateRecipe = () => {
                                 <div className="row addRecipe-ing-div">
                                     <h3> Ingredience: </h3>
                                     <div className='new-line'></div>
-                                    <IngredientsList />
+                                    <IngredientsList callParent={saveIngredients} callParent2={saveInputLength} />
                                 </div>
                                 <div className='new-line'></div>
 
@@ -158,7 +156,13 @@ const CreateRecipe = () => {
                                     </div>
                                     <div className="col">
                                         <label> Kategorie: </label>
-                                        <select className="form-control" dangerouslySetInnerHTML={{ __html: catOptions() }} onChange={(e) => setCategory(e.target.value)}></select>
+                                        <select className="form-control" onChange={(e) => setCategory(e.target.value)}>
+                                            {categories.map((x, i) => {
+                                                return (
+                                                    <option value={categories[i].id_ca} key={i} > {categories[i].name} </option>
+                                                );
+                                            })}
+                                        </select>
                                     </div>
                                 </div>
 

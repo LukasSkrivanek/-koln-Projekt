@@ -9,16 +9,29 @@ import { ImCross } from "react-icons/im";
 // Bricks
 import IngredientInputRow from '../bricks/ingredient-input-row';
 
+
+// Proměnné
 let ing
 let unit
+let ingredients = [];
 
-const IngredientsList = () => {
+const IngredientsList = (props) => {
     const [render, setRender] = useState(false);
     const [inputList, setInputList] = useState([{}]);
 
     useEffect(() => {
         getData();
     }, [])
+
+    const changeIngredient = (ingredient, index) =>{
+        ingredients[index] = ingredient;
+
+        props.callParent(ingredients);
+    }
+
+    const changeIngredientLength = (length) => {
+        props.callParent2(length);
+    }
 
     async function getData() {
         ing = await Axios.get("http://localhost:4000/ingredients/list", {})
@@ -32,18 +45,20 @@ const IngredientsList = () => {
         setRender(true)
     }
 
-    // Zpracování smazání
+    // Zpracování smazání ingredience
     const handleRemoveClick = index => {
         const list = [...inputList];
 
         list.splice(index, 1);
 
         setInputList(list);
+        changeIngredientLength(inputList.length - 1);
     };
 
-    // Zpracování přidání
+    // Zpracování přidání ingredience
     const handleAddClick = () => {
-        setInputList([...inputList, {}]);
+        setInputList([...inputList, {}]); 
+        changeIngredientLength(inputList.length + 1);
     };
 
     return (
@@ -51,7 +66,7 @@ const IngredientsList = () => {
             {render ? inputList.map((x, i) => {
                 return (
                     <div className="box" key={x}>
-                        <IngredientInputRow key={x} ingredients={ing} units={unit} />
+                        <IngredientInputRow key={x} ingredients={ing} units={unit} index={i} parentCall={changeIngredient} />
                         <div className="btn-box" key={x + "s"}>
                             {inputList.length !== 1 && <button key={x + "y"}
                                 className="mr10 btn btn-danger btn-ing-remove"
