@@ -19,6 +19,12 @@ class CategoriesDao {
         return JSON.stringify(connectionSync.query(sql));
     }
 
+    async GetCategory(id) {
+        const connectionSync = this._connectDBSync();
+        const syncResult = connectionSync.query(`SELECT * FROM categories WHERE id_ca = ${id}`)
+        return JSON.stringify(syncResult);
+    }
+
     _connectDBSync() {
         var connectionSync = new mysqlSync(
             {

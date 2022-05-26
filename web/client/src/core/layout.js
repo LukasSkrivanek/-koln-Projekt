@@ -13,7 +13,7 @@ const Layout = () => {
     const cookies = new Cookies();
     let {state, changeState} = useContext(LayoutContext);
     let loginVar = cookies.get('login');
-    console.log(loginVar)
+    
     return (
         <div>
             {loginVar > 0 ? <Registered_Layout /> : <Unregistered_Layout />}

@@ -1,7 +1,7 @@
 import '../App.css';
 import Axios from 'axios'
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Editor } from '@tinymce/tinymce-react';
 import Button from '@mui/material/Button';
@@ -21,6 +21,8 @@ let ingredients = [];
 let ingredientsLength = 1;
 
 const CreateRecipe = () => {
+    const navigate = useNavigate();
+
     const [categories, setCategories2] = useState([{ id_ca: 0, name: "LOADING" }]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -31,7 +33,9 @@ const CreateRecipe = () => {
     const [price, setPrice] = useState(0);
 
     const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
     const [descriptionLength, setDescriptionLength] = useState(0);
+    const [processLength, setProcessLength] = useState(0);
     const [link, setLink] = useState('');
     const [imgLink, setImgLink] = useState('');
 
@@ -39,6 +43,16 @@ const CreateRecipe = () => {
         getCategories();
         setDescriptionLength(description.length);
     }, [description])
+
+    useEffect(() => {
+        setProcessLength(process.length);
+    }, [process])
+
+    useEffect(() => {
+        if(success) {
+
+        }
+    }, [success])
 
     const saveIngredients = (ing) => {
         ingredients = ing;
@@ -50,26 +64,43 @@ const CreateRecipe = () => {
 
     async function getCategories() {
         let response = await Axios.get("http://localhost:4000/categories/list", {})
-        
-        setCategories2(response.data)
+
+        setCategories2(response.data);
+        setCategory(response.data[0].id_ca);
     }
 
-    const sendRecipe = () => {
-        let ing = ingredients.splice(ingredientsLength - 1, ingredients.length - ingredientsLength + 1)
+    const sendRecipe = (e) => {
+        e.preventDefault();
 
-        let data = {
-            title: title,
-            description: description,
-            process: process,
-            portions: portions,
-            category: category,
-            estimatedTime: time,
-            estimatedPrice: price,
-            image: link,
-            ingredients: ing
+        let ing = []
+
+        for (let i = 0; i < ingredientsLength; i++) {
+            ing.push(ingredients[i]);
         }
 
-        console.log(data)
+        if (title == "" || description == "" || process == "" || time == 0 || ingredients.length <= 1) {
+            setErrMsg("Nebyli vyplněny všechny údaje nebo není dostatek vyplněných ingrediencí");
+            return;
+        }
+
+        try {
+            const response = Axios.post('http://localhost:4000/recipes/createWithIngredients', {
+                title: title,
+                description: description,
+                process: process,
+                portions: Number(portions),
+                category: Number(category),
+                estimatedTime: Number(time),
+                estimatedPrice: Number(price),
+                image: link,
+                author: 1,
+                ingredients: ing
+            });
+
+            setSuccess(true);
+        } catch (error) {
+            setErrMsg(error);
+        }
     }
 
     const restartImg = () => {
@@ -111,27 +142,14 @@ const CreateRecipe = () => {
                                 <div className='new-line'></div>
                                 <div className="form-group">
                                     <label> Postup receptu: </label>
-                                    <Editor
-                                        initialValue=""
+                                    <textarea
+                                        className="form-control"
+                                        rows="15"
                                         placeholder="Sem napište postup svého receptu"
-                                        maxLength={3000}
-                                        onEditorChange={(e) => setProcess(e)}
-                                        init={{
-                                            height: 500,
-                                            menubar: false,
-                                            plugins: [
-                                                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
-                                                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                                                'insertdatetime', 'media', 'table', 'preview', 'help', 'wordcount'
-                                            ],
-                                            toolbar: 'undo redo | blocks | ' +
-                                                'bold italic forecolor | alignleft aligncenter ' +
-                                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                                'removeformat | help',
-                                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                                        }}
-                                    />
-                                    <small className="form-text text-muted"> Maximální délka postupu je 3000 znaků. </small>
+                                        maxLength={4000}
+                                        onChange={(e) => setProcess(e.target.value)}>
+                                    </textarea>
+                                    <small className="form-text text-muted"> Maximální délka postupu je 4000 znaků. Aktuální délka je: {processLength} </small>
                                 </div>
 
                                 <div className='new-line'></div>
@@ -151,7 +169,7 @@ const CreateRecipe = () => {
                                             className="form-control"
                                             placeholder="např. 30"
                                             aria-describedby="basic-addon2"
-                                            value={portions} min="0" max="10" step="1"
+                                            value={portions} min="0" max="200" step="1"
                                             onChange={(e) => setPortions(e.target.value)}></input>
                                     </div>
                                     <div className="col">
@@ -232,15 +250,18 @@ const CreateRecipe = () => {
                                 </div>
 
                                 <div className='new-line'></div>
+                                <div className='new-line'></div>
                                 <div className="form-group addRecipe-btn-div">
                                     <Button
                                         variant="contained"
                                         onClick={sendRecipe}
+                                        disabled={success ? 'disabled' : ''}
                                     >
                                         Přidat recept </Button>
                                     <div className='new-line'></div>
 
                                     <span className={errMsg ? "help-block red" : "help-block hidden"}> {errMsg} </span>
+                                    <span className={success ? "help-block green" : "help-block hidden"}> Recept byl vytvořen </span>
                                 </div>
                             </div>
                         </div>

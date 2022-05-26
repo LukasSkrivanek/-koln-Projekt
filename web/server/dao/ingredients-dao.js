@@ -27,6 +27,14 @@ class RecipesDao {
         return JSON.stringify(connectionSync.query(sql));
     }
 
+    async GetIngredientsOfRecipe(id) {
+        const connectionSync = this._connectDBSync();
+
+        let sql = `SELECT * FROM rec_ing r JOIN ingredients i ON i.id_in = r.id_in WHERE r.id_re = ${id}`;
+
+        return JSON.stringify(connectionSync.query(sql));
+    }
+
     async ListIngredients() {
         const connectionSync = this._connectDBSync();
 

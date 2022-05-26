@@ -5,9 +5,11 @@ let units = []
 let ingredients = []
 
 const IngredientInputRow = (props) => {
-    const [ number, setNumber ] = useState(0);
-    const [ unit, setUnit ] = useState(1);
-    const [ ingredient, setIngredient ] = useState(1);
+    const [number, setNumber] = useState(0);
+    const [name, setName] = useState("");
+    const [unit, setUnit] = useState(1);
+    const [unitName, setUnitName] = useState("");
+    const [ingredient, setIngredient] = useState(1);
 
     useEffect(() => {
         if (units.length < 1) {
@@ -21,19 +23,36 @@ const IngredientInputRow = (props) => {
                 ingredients.push(props.ingredients[i]);
             }
         }
+
+        setUnit(units[0].id_mu);
+        setUnitName(units[0].name)
+        setIngredient(ingredients[0].id_in);
+        setName(ingredients[0].name);
     }, [])
 
     useEffect(() => {
         let ing = {
             ingredient: ingredient,
+            name: name,
             unit: unit,
-            number: number
+            unitName: unitName,
+            number: Number(number)
         };
 
         let index = props.index;
 
         props.parentCall(ing, index);
     }, [number, unit, ingredient])
+
+    function handleUnitsOptions(i) {
+        setUnit(units[i].id_mu);
+        setUnitName(units[i].name)
+    }
+
+    function handleIngredientOptions(i) {
+        setIngredient(ingredients[i].id_in);
+        setName(ingredients[i].name);
+    }
 
     return (
         <div className="row">
@@ -52,10 +71,10 @@ const IngredientInputRow = (props) => {
             <div className="col">
                 <label> Jednotka: </label>
                 <div className="input-group mb-3">
-                    <select className="form-control" onChange={(e) => setUnit(e.target.value)}>
+                    <select className="form-control" onChange={(e) => handleUnitsOptions(e.target.value)}>
                         {units.map((x, i) => {
                             return (
-                                <option key={x + i} value={x.id_mu}> {x.name} </option>
+                                <option key={x + i} value={i}> {x.name} </option>
                             );
                         })}
                     </select>
@@ -64,12 +83,13 @@ const IngredientInputRow = (props) => {
             <div className="col">
                 <label> Daná ingredience: </label>
                 <div className="input-group mb-3">
-                    <select className="form-control" onChange={(e) => setIngredient(e.target.value)}>
-                    {ingredients.map((x, i) => {
+                    <select className="form-control"
+                        onChange={(e) => { handleIngredientOptions(e.target.value) }}>
+                        {ingredients.map((x, i) => {
                             return (
-                                <option key={x + i} value={x.id_in}> {x.name} </option>
+                                <option key={x.name} value={i}> {x.name} </option>
                             );
-                        })} 
+                        })}
                     </select>
                 </div>
             </div>

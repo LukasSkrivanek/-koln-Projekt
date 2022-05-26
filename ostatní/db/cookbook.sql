@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 01:18 PM
+-- Generation Time: May 26, 2022 at 02:31 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -40,7 +40,8 @@ INSERT INTO `categories` (`id_ca`, `name`) VALUES
 (1, 'Anglická snídaně'),
 (2, 'Teplá snídaně'),
 (3, 'Jednoduchá snídaně'),
-(4, 'Kontinentální snídaně');
+(4, 'Kontinentální snídaně'),
+(5, 'Dezerty');
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,33 @@ INSERT INTO `ingredients` (`id_in`, `name`) VALUES
 (2, 'Pepř'),
 (3, 'Paprika'),
 (5, 'Sůl'),
-(6, 'Mléko');
+(6, 'Mléko'),
+(9, 'Banány'),
+(10, 'Ovesné vločky'),
+(11, 'Kokos'),
+(12, 'Vajíčka'),
+(13, 'Bílý jogurt'),
+(14, 'Kypřící prášek do pečiva'),
+(15, 'Skořice'),
+(16, 'Olej na smažení'),
+(17, 'Maliny'),
+(18, 'Javorový sirup'),
+(19, 'Datle'),
+(20, 'Kešu ořechy'),
+(21, 'Raw kakaa'),
+(22, 'Med'),
+(23, 'Olej'),
+(24, 'Červená cibule'),
+(25, 'Česnek'),
+(26, 'Paprika'),
+(27, 'Chilli paprička'),
+(28, 'Rajče'),
+(29, 'Rajčatové pyré'),
+(30, 'Červené fazole'),
+(31, 'Římský kmín'),
+(32, 'Cukr'),
+(33, 'Koriandr'),
+(34, 'Sýr');
 
 -- --------------------------------------------------------
 
@@ -123,7 +150,14 @@ INSERT INTO `measure_units` (`id_mu`, `name`) VALUES
 (1, 'ml'),
 (2, 'mg'),
 (3, 'g'),
-(4, 'l');
+(4, 'l'),
+(5, 'ks'),
+(6, 'lžíce'),
+(7, 'velká lžíce'),
+(8, 'lžičky'),
+(9, 'hrst'),
+(10, 'špetka'),
+(11, 'hrnek');
 
 -- --------------------------------------------------------
 
@@ -164,9 +198,9 @@ CREATE TABLE `recipes` (
 --
 
 INSERT INTO `recipes` (`id_re`, `title`, `description`, `process`, `image`, `portions`, `estimatedTime`, `estimatedPrice`, `createdAt`, `category`, `author`) VALUES
-(4, 'Recept 1', 'Jen takový recept', 'Prostě to uvař', 'https://ms1.ostium.cz/instance/WrhA7R/h389w574t.jpg', 4, 30, 300, '2022-05-03 14:21:58', 1, 1),
-(5, 'Recept 2', 'Jen', 'Prostě to uvař', '', 4, 30, 300, '2022-05-03 15:35:23', 1, 1),
-(6, 'Recept 3', 'Ideální osvěžení v parných dnech? Samozřejmě zmrzlina a nejlépe ta domácí! Vyzkoušejte oblíbenou pistáciovou. Čistě přírodní, lahodná a s kousky pistácií potěší i náročnější mlsné jazýčky.', 'Prostě to uvař', 'https://ms1.ostium.cz/instance/web-recepty/jLWrhA7R/h389w574t.jpg', 4, 30, 300, '2022-05-03 15:35:23', 1, 1);
+(35, 'Banánové lívance', 'Tak tenhle recept, to je u nás poslední dobou fakt hit. Miuška je totiž miluje a je schopná jich sníst opravdu hodně. Víceméně celou tuhle dávku sní během dvou dnů většinou sama. Dělám je často na cesty, protože s nima nedělá velkej bordel a je to jistota. Určitě to není ale recept jenom pro děti. Mně chutnají taky moc a navíc jsou bez cukru (až na trochu sirupu v malinách, který ale ne vždycky dělám) a místo mouky jsou tam vločky.', 'Všechny ingredience na lívance vložím do mixéru a promixuju v hladký kompaktní těsto. Pokud používám zralý banány, což doporučuju bude těsto tak akorát sladký. Nemělo by být moc řídký, ale ani úplně hutný. Mělo by se jen lehce rozlít na pánvi. Pokud bude hodně řídký, přidám klidně ještě vločky a znovu promixuju, pokud hodně hustý, přidám vodu nebo mléko.\n\nNa pánvi si na středním plameni rozpálím trochu kokosovýho oleje a lívanečky opékám z obou stran dozlatova. Je to celkem rychlý, tak pozor, ať se nepřipálí.\n\nZmražený nebo čerstvý maliny dám do kastrůlku (pokud použijeme čerstvý, podliju je jen trochu vodou), přidám javorový sirup a nechám společně tak deset minut probublat. Hotový lívance namažu oblíbenou marmeládou nebo ořechovým máslem, naskládám na sebe, přeliju ovocným rozvarem a podávám. ', 'https://www.mycookingdiary.cz/wp-content/uploads/2021/01/p9106630-1080x810.jpg', 10, 21, 300, '2022-05-26 14:15:16', 1, 1),
+(36, 'Raw brownies', 'Raw dort měl u vás velkej úspěch, tak jsem se rozhodla zveřejnit další raw recept. Tentokrát je to brownies, který vlastně není nic jinýho, než takovej větší korpus toho dortu. Mně chutnalo moc a byla jsem překvapená, že i Adam ho snědl s chutí. Akorát pak skoro nechtěl večeři, jak je to sytý. Skvělý je na snídani, ale hlavně na svačinu. Dodá fakt hodně energie, takže do práce nebo do školy ideální.', 'Nejdřív jsem v robotu rozmixovala kešu ořechy a teprve pak jsem k nim přidala zbylý ingredience. Mixovala jsem do tý doby, než jsem neměla jednotnou hmotu. Do formy (přibližně 25×15 cm – brownies by mělo být vysoké tak 2 cm) jsem si pak dala pečící papír a na něj jsem urovnala rukama připravenou směs. Jde to trošku ztuha, tak se musí malinko zabrat. Takhle připravenou směs jsem ještě posypala drcenejma kešu oříškama a dala jsem na hodinu do mrazáku. Pokud nemáte formu, která může do mrazáku, pečící papír se směsí z formy vyndejte a dejte na nějakou podložku – třeba prkýnko. Před podáváním jsem nechala brownies trochu povolit a posypala jsem ho granátovým jablkem.', 'https://www.mycookingdiary.cz/wp-content/uploads/2016/03/p3060673-960x720.jpg', 1, 30, 250, '2022-05-26 14:19:37', 5, 1),
+(37, 'Huevos rancheros', 'Pokud máte rádi mexickou kuchyni, tak byste určitě měli vyzkoušet i jejich snídaně. Tyhle rančerský vejce jsou příklad, jak taková mexická snídaně může vypadat. Pro někoho je možná nepředstavitelný, že si dá po ránu něco ostrýho, ale fakt to člověka nakopne. A pokud ostrý zrovna nemusíte, tak to chilli vynechte. I když mně to přijde jako věčná škoda, protože je to dost zdravý…', 'Cibuli jsem nakrájela na kolečka, česnek na plátky, očištěnou papriku na větší kostky, rajčata na menší kostky a chilli na kolečka (množství a druh dávejte podle sebe). Cibuli a papriku jsem opékala asi pět minut na oleji, pak jsem přidala česnek, chilli, římský kmín a pokračovala jsem ještě další minutu. Směs jsem zalila rajčatovým pyré, přidala jsem čerstvý rajčata, fazole, sůl a pepř. Všechno jsem promíchala, přiklopila pokličkou a dusila pět minut. V tuhle chvíli máte poslední možnost směs dochutit a promíchat. Pokud vám přijde směs kyselá, přidejte trochu cukru. Lžící jsem pak vytvořila ve směsi důlek a do toho jsem rozklepla vejce. Dávejte pozor, ať vám tam nespadne skořápka. Proces jsem opakovala čtyřikrát a pak jsem zase pánev přiklopila pokličkou a nechala asi čtyři minuty dusit. Bílek musí bejt uvařenej a žloutek by měl zůstat tekutej. Nakoukněte proto občas pod pokličku a sledujte, jak na tom vejce je. Hotový vejce podávejte buď s tortillou nebo klasickým pečivem a zdobte čerstvým koriandrem a sýrem. Pro masožrouty doporučuju přidat do základu slaninu nebo nějakou klobásku.', 'https://www.mycookingdiary.cz/wp-content/uploads/2015/10/1-960x720.jpg', 1, 45, 500, '2022-05-26 14:31:02', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -177,9 +211,48 @@ INSERT INTO `recipes` (`id_re`, `title`, `description`, `process`, `image`, `por
 CREATE TABLE `rec_ing` (
   `id_re` int(11) DEFAULT NULL,
   `id_in` int(11) DEFAULT NULL,
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `measure_unit` int(11) DEFAULT NULL
+  `ing_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `number` int(11) NOT NULL,
+  `measure_unit` int(11) DEFAULT NULL,
+  `unit_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `rec_ing`
+--
+
+INSERT INTO `rec_ing` (`id_re`, `id_in`, `ing_name`, `number`, `measure_unit`, `unit_name`) VALUES
+(35, 9, 'Banány', 2, 5, 'ks'),
+(35, 10, 'Ovesné vločky', 4, 6, 'lžíce'),
+(35, 11, 'Kokos', 2, 6, 'lžíce'),
+(35, 12, 'Vajíčka', 3, 5, 'ks'),
+(35, 13, 'Bílý jogurt', 1, 7, 'velká lžíce'),
+(35, 14, 'Kypřící prášek do pečiva', 1, 8, 'lžičky'),
+(35, 15, 'Skořice', 1, 8, 'lžičky'),
+(35, 16, 'Olej na smažení', 10, 1, 'ml'),
+(35, 17, 'Maliny', 2, 9, 'hrst'),
+(35, 18, 'Javorový sirup', 1, 6, 'lžíce'),
+(35, 5, 'Sůl', 1, 10, 'špetka'),
+(36, 19, 'Datle', 2, 11, 'hrnek'),
+(36, 20, 'Kešu ořechy', 1, 11, 'hrnek'),
+(36, 21, 'Raw kakaa', 3, 6, 'lžíce'),
+(36, 11, 'Kokos', 2, 6, 'lžíce'),
+(36, 22, 'Med', 2, 8, 'lžičky'),
+(37, 23, 'Olej', 2, 6, 'lžíce'),
+(37, 24, 'Červená cibule', 1, 5, 'ks'),
+(37, 25, 'Česnek', 1, 5, 'ks'),
+(37, 26, 'Paprika', 1, 5, 'ks'),
+(37, 27, 'Chilli paprička', 1, 5, 'ks'),
+(37, 28, 'Rajče', 2, 5, 'ks'),
+(37, 29, 'Rajčatové pyré', 200, 3, 'g'),
+(37, 30, 'Červené fazole', 3, 6, 'lžíce'),
+(37, 12, 'Vajíčka', 4, 5, 'ks'),
+(37, 31, 'Římský kmín', 1, 8, 'lžičky'),
+(37, 5, 'Sůl', 5, 2, 'mg'),
+(37, 2, 'Pepř', 5, 2, 'mg'),
+(37, 32, 'Cukr', 10, 2, 'mg'),
+(37, 33, 'Koriandr', 15, 2, 'mg'),
+(37, 34, 'Sýr', 50, 3, 'g');
 
 -- --------------------------------------------------------
 
@@ -311,7 +384,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_ca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -323,13 +396,13 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `id_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `measure_units`
 --
 ALTER TABLE `measure_units`
-  MODIFY `id_mu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_mu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -341,7 +414,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id_re` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_re` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `roles`

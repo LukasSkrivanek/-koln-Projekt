@@ -1,0 +1,14 @@
+Bonus věci
+-------------------------------------------
+Home
+ - ošetřit vypsání receptů, když jich je méně jak 3
+ - Tlačítko "Více nejnovějších receptů" aby odkázalo na funkční stránku
+
+Login
+ - opravit volání na server
+
+createRecipe
+ - vyhledávání ve výběru ingrediencí
+
+
+

@@ -20,15 +20,14 @@ let schema = {
     "required": ["title", "description", "process", "image", "portions", "estimatedTime", "estimatedPrice", "category", "author"]
 };
 
-async function CreateAbl(req, res) { 
+async function CreateWithIngredientsAbl(req, res) { 
     try {
         const ajv = new Ajv();
         const valid = ajv.validate(schema, req.body);
         
         if (valid == true) {
             let recipe = req.body;
-            
-            recipe = await dao.CreateRecipe(recipe);
+            recipe = await dao.CreateRecipeWithIngredients(recipe);
             res.json(recipe);
         } else {
             res.status(400).send({
@@ -46,4 +45,4 @@ async function CreateAbl(req, res) {
     }
 }
 
-module.exports = CreateAbl;
+module.exports = CreateWithIngredientsAbl;
