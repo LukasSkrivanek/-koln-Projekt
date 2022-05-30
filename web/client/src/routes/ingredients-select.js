@@ -40,8 +40,6 @@ const IngredientsList = (props) => {
         unit = await Axios.get("http://localhost:4000/measure_units/list", {})
         unit = unit.data
         
-        handleAddClick()
-        handleRemoveClick(1)
         setRender(true)
     }
 

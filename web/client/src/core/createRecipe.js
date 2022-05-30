@@ -3,6 +3,7 @@ import Axios from 'axios'
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Select, { AriaOnFocus } from 'react-select';
 import { Editor } from '@tinymce/tinymce-react';
 import Button from '@mui/material/Button';
 
@@ -49,10 +50,14 @@ const CreateRecipe = () => {
     }, [process])
 
     useEffect(() => {
-        if(success) {
+        if (success) {
 
         }
     }, [success])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [title, process, description, portions, time, price])
 
     const saveIngredients = (ing) => {
         ingredients = ing;
@@ -64,9 +69,17 @@ const CreateRecipe = () => {
 
     async function getCategories() {
         let response = await Axios.get("http://localhost:4000/categories/list", {})
+        let temp = [];
 
-        setCategories2(response.data);
-        setCategory(response.data[0].id_ca);
+        for(let i = 0; i < response.data.length; i++) {
+            temp.push({
+                value: response.data[i].id_ca,
+                label: response.data[i].name
+            })
+        }
+
+        setCategories2(temp);
+        setCategory(0);
     }
 
     const sendRecipe = (e) => {
@@ -78,8 +91,10 @@ const CreateRecipe = () => {
             ing.push(ingredients[i]);
         }
 
-        if (title == "" || description == "" || process == "" || time == 0 || ingredients.length <= 1) {
-            setErrMsg("Nebyli vyplněny všechny údaje nebo není dostatek vyplněných ingrediencí");
+        let containsUndef = checkIngredients();
+        
+        if (title == "" || description == "" || process == "" || time == 0 || price == 0 || category == 0 || containsUndef || ingredients.length <= 1) {
+            setErrMsg("Nebyli vyplněny všechny údaje nebo není dostatečný počet vyplněných ingrediencí");
             return;
         }
 
@@ -110,6 +125,22 @@ const CreateRecipe = () => {
 
     const tryImg = () => {
         setImgLink(link)
+    }
+
+    function changeCategory(selected) {
+        setCategory(selected.value);
+    }
+
+    function checkIngredients() {
+        let temp = false;
+
+        for(let i = 0; i < ingredients.length; i++) {
+            if(ingredients[i] == undefined) {
+                temp = true;
+            }
+        }
+
+        return temp;
     }
 
     return (
@@ -174,13 +205,14 @@ const CreateRecipe = () => {
                                     </div>
                                     <div className="col">
                                         <label> Kategorie: </label>
-                                        <select className="form-control" onChange={(e) => setCategory(e.target.value)}>
-                                            {categories.map((x, i) => {
-                                                return (
-                                                    <option value={categories[i].id_ca} key={i} > {categories[i].name} </option>
-                                                );
-                                            })}
-                                        </select>
+                                        <Select
+                                            aria-labelledby="aria-label"
+                                            inputId="aria-example-input"
+                                            name="aria-live-color"
+                                            placeholder="Vyberte kategorii.."
+                                            onChange={changeCategory}
+                                            options={categories}
+                                        />
                                     </div>
                                 </div>
 

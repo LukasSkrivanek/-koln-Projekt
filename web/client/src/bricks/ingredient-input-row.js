@@ -1,36 +1,42 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
+import Select, { AriaOnFocus } from 'react-select';
 
 let units = []
 let ingredients = []
 
 const IngredientInputRow = (props) => {
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState("");
     const [name, setName] = useState("");
-    const [unit, setUnit] = useState(1);
+    const [unit, setUnit] = useState("");
     const [unitName, setUnitName] = useState("");
-    const [ingredient, setIngredient] = useState(1);
+    const [ingredient, setIngredient] = useState("");
 
     useEffect(() => {
         if (units.length < 1) {
             for (let i = 0; i < props.units.length; i++) {
-                units.push(props.units[i]);
+                units.push({
+                    value: props.units[i].id_mu,
+                    label: props.units[i].name
+                });
             }
         }
 
         if (ingredients.length < 1) {
             for (let i = 0; i < props.ingredients.length; i++) {
-                ingredients.push(props.ingredients[i]);
+                ingredients.push({
+                    value: props.ingredients[i].id_in,
+                    label: props.ingredients[i].name
+                });
             }
         }
-
-        setUnit(units[0].id_mu);
-        setUnitName(units[0].name)
-        setIngredient(ingredients[0].id_in);
-        setName(ingredients[0].name);
     }, [])
 
     useEffect(() => {
+        if(name == "" || unitName == "" || ingredient == "" || unit == "" || number == "") {
+            return
+        }
+
         let ing = {
             ingredient: ingredient,
             name: name,
@@ -44,14 +50,14 @@ const IngredientInputRow = (props) => {
         props.parentCall(ing, index);
     }, [number, unit, ingredient])
 
-    function handleUnitsOptions(i) {
-        setUnit(units[i].id_mu);
-        setUnitName(units[i].name)
+    function handleUnitsOptions(selected) {
+        setUnit(selected.value);
+        setUnitName(selected.label)
     }
 
-    function handleIngredientOptions(i) {
-        setIngredient(ingredients[i].id_in);
-        setName(ingredients[i].name);
+    function handleIngredientOptions(selected) {
+        setIngredient(selected.value);
+        setName(selected.label);
     }
 
     return (
@@ -63,35 +69,32 @@ const IngredientInputRow = (props) => {
                         type="number"
                         className="form-control"
                         placeholder="např. 30"
-                        min={1}
+                        min={0.1}
                         aria-describedby="basic-addon2"
                         onChange={(e) => setNumber(e.target.value)}></input>
                 </div>
             </div>
             <div className="col">
                 <label> Jednotka: </label>
-                <div className="input-group mb-3">
-                    <select className="form-control" onChange={(e) => handleUnitsOptions(e.target.value)}>
-                        {units.map((x, i) => {
-                            return (
-                                <option key={x + i} value={i}> {x.name} </option>
-                            );
-                        })}
-                    </select>
-                </div>
+                <Select
+                    aria-labelledby="aria-label"
+                    inputId="aria-example-input"
+                    name="aria-live-color"
+                    placeholder="Vyberte jednotku.."
+                    onChange={handleUnitsOptions}
+                    options={units}
+                />
             </div>
             <div className="col">
                 <label> Daná ingredience: </label>
-                <div className="input-group mb-3">
-                    <select className="form-control"
-                        onChange={(e) => { handleIngredientOptions(e.target.value) }}>
-                        {ingredients.map((x, i) => {
-                            return (
-                                <option key={x.name} value={i}> {x.name} </option>
-                            );
-                        })}
-                    </select>
-                </div>
+                <Select
+                    aria-labelledby="aria-label"
+                    inputId="aria-example-input"
+                    name="aria-live-color"
+                    placeholder="Vyberte ingredienci.."
+                    onChange={handleIngredientOptions}
+                    options={ingredients}
+                />
             </div>
         </div>
     )

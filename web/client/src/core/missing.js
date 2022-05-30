@@ -5,7 +5,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 // Ikony
 import { MdOutlineError } from "react-icons/md";
 
-const Register = () => {
+const Missing = () => {
     const navigate = useNavigate();
 
     return (
@@ -28,4 +28,4 @@ const Register = () => {
     )
 };
 
-export default Register;
+export default Missing;

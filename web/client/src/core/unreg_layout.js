@@ -4,6 +4,9 @@ import { Outlet, Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { height } from '@mui/system';
 
+// Obrázky
+import Logo from '../img/logo_1.jpg'
+
 const Layout = () => {
     return (
         <>

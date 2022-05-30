@@ -8,23 +8,6 @@ import RecipesList from '../routes/recipes-list';
 import Fab from '@mui/material/Fab';
 import { LayoutContext } from '../context/layoutContext';
 
-
-
-let categories = [
-    {
-        id_ca: 1,
-        name: "Snídaně"
-    },
-    {
-        id_ca: 2,
-        name: "Obědy"
-    },
-    {
-        id_ca: 3,
-        name: "Večeře"
-    }
-]
-
 const Home = () => {
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -35,18 +18,19 @@ const Home = () => {
     }
 
     return (
-        <>{
+        <>
+            <div className='new-line'></div>
+            
             <div className='recipe-div'>
-                {<RecipesList type={0} />}
-                <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("#")}> Více nejnovějších receptů </button>
+                {<RecipesList type={0}/>}
+                <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("recipe/new")}> Více nejnovějších receptů </button>
             </div>
-            /*
+            
             <div className='recipe-div'>
-                {<RecipesList type={1} recipe={recipes} />}
+                {<RecipesList type={1} />}
                 <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("#")}> Více nejoblíbenějších receptů </button>
-    </div> */}
-
-            <div className='fatDiv'></div>
+            </div>
+    
             <div className="addRecipeButton">
                 <Fab color="primary" aria-label="add" onClick={() => Redirect("recipe/create")}>
                     <span className="plusIcon"> + </span>

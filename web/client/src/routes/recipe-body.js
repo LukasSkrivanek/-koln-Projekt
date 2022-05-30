@@ -43,12 +43,12 @@ const RecipesBody = (props) => {
         let temp = `<ul class="list-group">`;
 
         for (let i = 0; i < ingredientsInfo.length; i++) {
-            temp = temp + (`<li class="list-group-item"> ${ingredientsInfo[i].ing_name} - ${ingredientsInfo[i].number * (p / basePortions)} ${ingredientsInfo[i].unit_name} </li>`);
+            temp = temp + (`<li class="list-group-item"> ${ingredientsInfo[i].ing_name} - ${Math.round((ingredientsInfo[i].number * (p / basePortions) * 100) / 100)} ${ingredientsInfo[i].unit_name} </li>`);
         }
 
         temp = temp + (`</ul>`)
 
-        setEstimatedPrice(basePrice * (p / basePortions));
+        setEstimatedPrice(Math.round((basePrice * (p / basePortions) * 100) / 100));
         setIngredients(temp);
     }
 
@@ -129,11 +129,13 @@ const RecipesBody = (props) => {
     }
 
     async function deleteRecipe() {
-        let response = await Axios.post("http://localhost:4000/recipes/delete", {
-            id: recipe.id_re
-        });
-
-        navigate("/");
+        if (window.confirm("Jste si jistý, že chcete smazat tento recept?")) {
+            let response = await Axios.post("http://localhost:4000/recipes/delete", {
+                id: recipe.id_re
+            });
+    
+            navigate("/");
+          }
     }
 
     return (

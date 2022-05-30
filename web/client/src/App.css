@@ -1,5 +1,9 @@
 /* General */
 
+.web-title-h1 {
+  padding-left: 15px;
+}
+
 .hidden {
   display: none;
 }

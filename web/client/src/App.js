@@ -11,7 +11,9 @@ import LogIn from './core/login';
 import Profile from './core/profile';
 import Recipe from './core/recipe';
 
-import CreateRecipe from './core/createRecipe'
+import NewRecipes from './core/newRecipes';
+
+import CreateRecipe from './core/createRecipe';
 import Missing from './core/missing';
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
             <Route path="recipe/">
               <Route index element={<Recipe />} />
               <Route path="create" element={<CreateRecipe />}></Route>
+              <Route path="new" element={<NewRecipes />}></Route>
             </Route>
 
             <Route path="*" element={<Missing />}></Route>

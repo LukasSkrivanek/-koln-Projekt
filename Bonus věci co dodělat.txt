@@ -1,14 +1,19 @@
 Bonus věci
 -------------------------------------------
 Home
- - ošetřit vypsání receptů, když jich je méně jak 3
- - Tlačítko "Více nejnovějších receptů" aby odkázalo na funkční stránku
+ - ošetřit vypsání receptů, když jich je méně jak 3                     
+ - Tlačítko "Více nejnovějších receptů" aby odkázalo na funkční stránku | HOTOVO
 
 Login
  - opravit volání na server
 
+Recipe
+ - zaokrouhlení ingrediencí nahoru                                      | HOTOVO
+ - potvrzení při mazání receptu                                         | HOTOVO
+
 createRecipe
- - vyhledávání ve výběru ingrediencí
+ - vyhledávání ve výběru ingrediencí                                    | HOTOVO
+ - ověření, že jsou ingredience vyplněny                                | HOTOVO (tak nějak)
 
 
 
