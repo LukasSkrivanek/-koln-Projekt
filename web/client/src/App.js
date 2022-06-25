@@ -20,7 +20,7 @@ function App() {
   const cookies = new Cookies();
   const { state, changeState } = 0;
 
-  cookies.set('login', 0, { path: '/' });
+  cookies.set('login', 1, { path: '/' });
   cookies.set('id', '0', { path: '/' });
   cookies.set('username', '', { path: '/' });
   cookies.set('role', 0, { path: '/' });

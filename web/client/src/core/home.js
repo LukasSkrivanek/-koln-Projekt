@@ -22,12 +22,12 @@ const Home = () => {
             <div className='new-line'></div>
             
             <div className='recipe-div'>
-                {<RecipesList type={0}/>}
+                <RecipesList type={0}/>
                 <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("recipe/new")}> Více nejnovějších receptů </button>
             </div>
             
             <div className='recipe-div'>
-                {<RecipesList type={1} />}
+                <RecipesList type={1} />
                 <button type="button" className="btn btn-secondary btn-lg btn-dark" onClick={() => Redirect("#")}> Více nejoblíbenějších receptů </button>
             </div>
     
